@@ -1,0 +1,15 @@
+*.pyc
+.stestr.conf
+*.log
+.venv
+.pytest_cache/
+__pycache__/
+.tox/
+.stestr/
+venv/
+tests.egg-info/
+dist/
+.idea/
+bin/
+include/
+lib/
