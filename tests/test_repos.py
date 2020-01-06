@@ -1,5 +1,6 @@
 from simple_rest_client.api import API
 from simple_rest_client.resource import Resource
+from token_example import TOKEN
 import pytest
 import testtools
 
@@ -11,7 +12,7 @@ class Repos(Resource):
         'create_repo': {'method': 'POST', 'url': '/{}/repos' }
         }
 
-default_params = {'access_token': 'a530cc5aceefdf2322d91cbca5c924a426b4c4e6'}
+default_params = {'access_token': TOKEN}
 
 api = API(
     api_root_url='https://api.github.com/', # base api url
@@ -24,14 +25,14 @@ api = API(
 
 api.add_resource(resource_name='repos', resource_class=Repos)
 
-class UsersActions(testtools.TestCase):
+class ReposActions(testtools.TestCase):
 
     def test_get_user_repos(self):
         response=api.repos.list_user_repo('SofyaTavrovskaya', body=None, params={}, headers={})
         self.assertEqual(response.status_code, 200)
 
     def test_create_repo(self):
-        response=api.repos.create_repo('SofyaTavrovskaya', body={}, params={'name': 'test'}, headers={"Accept": "application/vnd.github.nebula-preview+json"})
+        response=api.repos.create_repo('SofyaTavrovskaya', body={}, params={'name': 'test', 'visibility': 'public'}, headers={"Accept": "application/vnd.github.nebula-preview+json"})
         self.assertEqual(response.status_code, 201)
 
     def test_create_project(self):

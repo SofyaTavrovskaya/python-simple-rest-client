@@ -1,5 +1,5 @@
 import testtools
-import imp
+from token_example import TOKEN
 from simple_rest_client.api import API
 from simple_rest_client.resource import Resource
 
@@ -11,7 +11,8 @@ class Users(Resource):
         'info': {'method': 'GET', 'url': 'users/{}/hovercard'},
         }
 
-default_params = {'access_token': 'a530cc5aceefdf2322d91cbca5c924a426b4c4e6'}
+default_params = {'access_token': TOKEN}
+print(default_params)
 
 api = API(
     api_root_url='https://api.github.com/', # base api url
@@ -26,7 +27,7 @@ api.add_resource(resource_name='users', resource_class=Users)
 
 class UsersActions(testtools.TestCase):
     def test_authorization(self):
-        response=api.users.authorization(body=None, params={}, headers={'token': 'a530cc5aceefdf2322d91cbca5c924a426b4c4e6'})
+        response=api.users.authorization(body=None, params={}, headers={'token': TOKEN})
         self.assertEqual(response.status_code,200)
 
     def test_get_user_profile(self):
