@@ -1,41 +1,54 @@
+import pytest
 from simple_rest_client.api import API
 from simple_rest_client.resource import Resource
 from token_example import TOKEN
-import pytest
 import testtools
+
 
 class Repos(Resource):
     actions = {
         'list_user_repo': {'method': 'GET', 'url': 'users/{}/repos'},
         'list_public_repo': {'method': 'GET', 'url': 'repositories'},
         'create_project': {'method': 'POST', 'url': '/repos/{}/{}/projects'},
-        'create_repo': {'method': 'POST', 'url': '/{}/repos' }
+        'create_repo': {'method': 'POST', 'url': 'user/repos'},
+        'delete_repo': {'method': 'DELETE', 'url': '/repos/{}/{}'}
         }
+
 
 default_params = {'access_token': TOKEN}
 
-api = API(
-    api_root_url='https://api.github.com/', # base api url
-    timeout=2, # default timeout in seconds
-    append_slash=False, # append slash to final url
+repos_api = API(
+    api_root_url='https://api.github.com/',  # base api url
+    timeout=2,  # default timeout in seconds
+    append_slash=False,  # append slash to final url
     ssl_verify=False,
     json_encode_body=True,
     params=default_params
 )
 
-api.add_resource(resource_name='repos', resource_class=Repos)
+repos_api.add_resource(resource_name='repos', resource_class=Repos)
 
-class ReposActions(testtools.TestCase):
 
-    def test_get_user_repos(self):
-        response=api.repos.list_user_repo('SofyaTavrovskaya', body=None, params={}, headers={})
-        self.assertEqual(response.status_code, 200)
+@pytest.mark.repos
+def test_get_user_repos():
+    response = repos_api.repos.list_user_repo('SofyaTavrovskaya', body=None, params={}, headers={})
+    assert response.status_code == 200
 
-    def test_create_repo(self):
-        response=api.repos.create_repo('SofyaTavrovskaya', body={}, params={'name': 'test', 'visibility': 'public'}, headers={"Accept": "application/vnd.github.nebula-preview+json"})
-        self.assertEqual(response.status_code, 201)
 
-    def test_create_project(self):
-        response=api.repos.create_project('SofyaTavrovskaya', 'test', body={"name": "test"}, params={}, headers={"Accept": "application/vnd.github.inertia-preview+json"})
-        self.assertEqual(response.status_code, 201)
+@pytest.mark.repos
+def test_create_repo():
+    response = repos_api.repos.create_repo(body={'name': 'test', 'visibility': 'public'}, params={}, headers={"Accept": "application/vnd.github.nebula-preview+json", "X-OAuth-Scopes": "repo, user"})
+    assert response.status_code == 201
+
+
+@pytest.mark.repos
+def test_create_repo_project():
+    response = repos_api.repos.create_project('SofyaTavrovskaya', 'test', body={"name": "test"}, params={}, headers={"Accept": "application/vnd.github.inertia-preview+json"})
+    assert response.status_code == 201
+
+
+@pytest.mark.repos
+def test_delete_repo():
+    response = repos_api.repos.delete_repo('SofyaTavrovskaya', 'test', params={}, headers={"X-OAuth-Scopes": "delete_repo"})
+    assert response.status_code == 204
 
