@@ -47,7 +47,7 @@ def test_get_user_profile():
 
 @pytest.mark.users
 def test_get_user_info():
-    response = user_api.users.info('octicon', body=None, params={}, headers={})
+    response = user_api.users.info('SofyaTavrovskaya', body=None, params={}, headers={})
     assert response.status_code == 200
 
 
