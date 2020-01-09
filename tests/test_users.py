@@ -1,7 +1,11 @@
+import logging
+import os
 import pytest
-from token_example import TOKEN
 from simple_rest_client.api import API
 from simple_rest_client.resource import Resource
+
+
+logger = logging.getLogger(__name__)
 
 
 class Users(Resource):
@@ -13,7 +17,7 @@ class Users(Resource):
         }
 
 
-default_params = {'access_token': TOKEN}
+default_params = {'access_token': os.environ.get('TOKEN')}
 
 
 user_api = API(
@@ -31,7 +35,7 @@ user_api.add_resource(resource_name='users', resource_class=Users)
 @pytest.mark.repeat(3)
 @pytest.mark.users
 def test_authorization():
-    response = user_api.users.authorization(body=None, params={}, headers={'token': TOKEN})
+    response = user_api.users.authorization(body=None, params={}, headers={'token': os.environ.get('TOKEN')})
     assert response.status_code == 200
 
 
