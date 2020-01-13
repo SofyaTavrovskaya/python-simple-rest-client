@@ -32,30 +32,25 @@ repos_api = API(
 repos_api.add_resource(resource_name='repos', resource_class=Repos)
 
 
-@pytest.mark.run(order=1)
 @pytest.mark.repos
-def test_create_repo():
-    response = repos_api.repos.create_repo(body={'name': 'test', 'visibility': 'public'}, params={}, headers={"Accept": "application/vnd.github.nebula-preview+json", "X-OAuth-Scopes": "repo, user"})
-    assert response.status_code == 201
+class TestRepos:
+    def test_create_repo(self):
+        response = repos_api.repos.create_repo(body={'name': 'test', 'visibility': 'public'}, params={},
+                                            headers={"Accept": "application/vnd.github.nebula-preview+json", "X-OAuth-Scopes": "repo, user"})
+        assert response.status_code == 201
 
+    def test_create_repo_project(self):
+        response = repos_api.repos.create_project('SofyaTavrovskaya', 'test', body={"name": "test"}, params={},
+                                               headers={"Accept": "application/vnd.github.inertia-preview+json"})
+        assert response.status_code == 201
 
-@pytest.mark.run(order=2)
-@pytest.mark.repos
-def test_create_repo_project():
-    response = repos_api.repos.create_project('SofyaTavrovskaya', 'test', body={"name": "test"}, params={}, headers={"Accept": "application/vnd.github.inertia-preview+json"})
-    assert response.status_code == 201
+    def test_delete_repo(self):
+        response = repos_api.repos.delete_repo('SofyaTavrovskaya', 'test', params={}, headers={"X-OAuth-Scopes":
+                                                                                                "delete_repo"})
+        assert response.status_code == 204
 
-
-@pytest.mark.run(order=3)
-@pytest.mark.repos
-def test_delete_repo():
-    response = repos_api.repos.delete_repo('SofyaTavrovskaya', 'test', params={}, headers={"X-OAuth-Scopes": "delete_repo"})
-    assert response.status_code == 204
-
-
-@pytest.mark.repeat(10)
-@pytest.mark.asyncio
-@pytest.mark.repos
-async def repos_list():
-    response = await repos_api.repos.list_user_repo('SofyaTavrovskaya', body=None, params={}, headers={})
-    assert response.status_code == 200
+    @pytest.mark.asyncio
+    @pytest.mark.repeat(3)
+    async def repos_list(self):
+        response = await repos_api.repos.list_user_repo('SofyaTavrovskaya', body=None, params={}, headers={})
+        assert response.status_code == 200

@@ -33,26 +33,20 @@ user_api = API(
 user_api.add_resource(resource_name='users', resource_class=Users)
 
 
-@pytest.mark.repeat(3)
 @pytest.mark.users
-def test_authorization():
-    response = user_api.users.authorization(body=None, params={}, headers={'token': os.environ.get('TOKEN')})
-    assert response.status_code == 200
+class TestUsers:
+    def test_authorization(self):
+        response = user_api.users.authorization(body=None, params={}, headers={'token': os.environ.get('TOKEN')})
+        assert response.status_code == 200
 
+    def test_get_user_profile(self):
+        response = user_api.users.profile('SofyaTavrovskaya', body=None, params={}, headers={})
+        assert response.status_code == 200
 
-@pytest.mark.users
-def test_get_user_profile():
-    response = user_api.users.profile('SofyaTavrovskaya', body=None, params={}, headers={})
-    assert response.status_code == 200
+    def test_get_user_info(self):
+        response = user_api.users.info('SofyaTavrovskaya', body=None, params={}, headers={})
+        assert response.status_code == 200
 
-
-@pytest.mark.users
-def test_get_user_info():
-    response = user_api.users.info('SofyaTavrovskaya', body=None, params={}, headers={})
-    assert response.status_code == 200
-
-
-@pytest.mark.users
-def test_user_list():
-    response = user_api.users.list(body=None, params={}, headers={})
-    assert response.status_code == 200
+    def test_user_list(self):
+        response = user_api.users.list(body=None, params={}, headers={})
+        assert response.status_code == 200
