@@ -14,7 +14,8 @@ class Repos(Resource):
         'list_public_repo': {'method': 'GET', 'url': 'repositories'},
         'create_project': {'method': 'POST', 'url': '/repos/{}/{}/projects'},
         'create_repo': {'method': 'POST', 'url': 'user/repos'},
-        'delete_repo': {'method': 'DELETE', 'url': '/repos/{}/{}'}
+        'delete_repo': {'method': 'DELETE', 'url': '/repos/{}/{}'},
+        'edit_repo': {'method': 'PATCH', 'url': '/repos/{}/{}'}
         }
 
 
@@ -34,9 +35,8 @@ repos_api.add_resource(resource_name='repos', resource_class=Repos)
 
 @pytest.mark.repos
 class TestRepos:
-    def test_create_repo(self):
-        response = repos_api.repos.create_repo(body={'name': 'test', 'visibility': 'public'}, params={},
-                                            headers={"Accept": "application/vnd.github.nebula-preview+json", "X-OAuth-Scopes": "repo, user"})
+    def test_create_repo(self, name='test'):
+        response = repos_api.repos.create_repo(body={'name': name, 'visibility': 'public'}, params={}, headers={"Accept": "application/vnd.github.nebula-preview+json", "X-OAuth-Scopes": "repo, user"})
         assert response.status_code == 201
 
     def test_create_repo_project(self):
@@ -44,8 +44,8 @@ class TestRepos:
                                                headers={"Accept": "application/vnd.github.inertia-preview+json"})
         assert response.status_code == 201
 
-    def test_delete_repo(self):
-        response = repos_api.repos.delete_repo('SofyaTavrovskaya', 'test', params={}, headers={"X-OAuth-Scopes":
+    def test_delete_repo(self, name='test'):
+        response = repos_api.repos.delete_repo('SofyaTavrovskaya', name, params={}, headers={"X-OAuth-Scopes":
                                                                                                 "delete_repo"})
         assert response.status_code == 204
 
@@ -54,3 +54,10 @@ class TestRepos:
     async def repos_list(self):
         response = await repos_api.repos.list_user_repo('SofyaTavrovskaya', body=None, params={}, headers={})
         assert response.status_code == 200
+
+    def test_edit_repo(self, name='test_edit'):
+        self.test_create_repo(name)
+        response = repos_api.repos.edit_repo('SofyaTavrovskaya', name, body={'name': 'test_edit2'}, params={},
+                                             headers={"Accept": "application/vnd.github.nebula-preview+json"})
+        assert response.status_code==200
+        self.test_delete_repo(name='test_edit2')
