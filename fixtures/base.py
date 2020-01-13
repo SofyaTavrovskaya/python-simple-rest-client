@@ -2,7 +2,7 @@ import pytest
 import os
 
 
-@pytest.fixture(scope='function')
+@pytest.fixture(scope='session', autouse=True)
 def check_token():
     if os.environ.get('TOKEN') is not None:
         return 0

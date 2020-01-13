@@ -3,6 +3,7 @@ import os
 import pytest
 from simple_rest_client.api import API
 from simple_rest_client.resource import Resource
+from fixtures.base import check_token
 
 logger = logging.getLogger(__name__)
 
