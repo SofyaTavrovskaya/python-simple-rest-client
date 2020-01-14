@@ -33,6 +33,7 @@ user_api = API(
 user_api.add_resource(resource_name='users', resource_class=Users)
 
 
+@pytest.mark.usefixtures('check_token')
 @pytest.mark.users
 class TestUsers:
     def test_authorization(self):

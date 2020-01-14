@@ -33,6 +33,7 @@ repos_api = API(
 repos_api.add_resource(resource_name='repos', resource_class=Repos)
 
 
+@pytest.mark.usefixtures('check_token')
 @pytest.mark.repos
 class TestRepos:
     def test_create_repo(self, name='test'):
@@ -59,5 +60,7 @@ class TestRepos:
         self.test_create_repo(name)
         response = repos_api.repos.edit_repo('SofyaTavrovskaya', name, body={'name': 'test_edit2'}, params={},
                                              headers={"Accept": "application/vnd.github.nebula-preview+json"})
-        assert response.status_code==200
+        assert response.status_code == 200
         self.test_delete_repo(name='test_edit2')
+
+
