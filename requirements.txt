@@ -41,6 +41,6 @@ testtools==2.4.0
 toml==0.10.0
 traceback2==1.4.0
 unittest2==1.1.0
-virtualenv==16.7.9
+virtualenv==20.0.18
 wcwidth==0.1.8
 zipp==0.6.0
