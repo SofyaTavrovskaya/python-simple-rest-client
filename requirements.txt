@@ -36,7 +36,7 @@ python-status==1.0.1
 PyYAML==5.3.1
 rfc3986==1.4.0
 simple-rest-client==1.0.5
-six==1.13.0
+six==1.14.0
 testtools==2.3.0
 toml==0.10.0
 traceback2==1.4.0
