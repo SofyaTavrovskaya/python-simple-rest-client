@@ -35,7 +35,7 @@ python-mimeparse==1.6.0
 python-status==1.0.1
 PyYAML==5.3.1
 rfc3986==1.4.0
-simple-rest-client==1.0.2
+simple-rest-client==1.0.5
 six==1.13.0
 testtools==2.3.0
 toml==0.10.0
