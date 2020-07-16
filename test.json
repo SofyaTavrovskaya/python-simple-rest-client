@@ -7,7 +7,7 @@
 }
 {
 	"Path": "github.com/kubernetes/kubernetes",
-	"Version": "v0.56.0",
+	"Version": "v1.12.0",
 	"Time": "2020-03-31T22:28:14Z",
 	"Indirect": true,
 	"Dir": "/home/stavrovskaya/go/pkg/mod/cloud.google.com/go@v0.56.0",
