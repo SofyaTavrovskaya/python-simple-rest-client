@@ -1,0 +1,48 @@
+{"image_category": {
+  "default_category": "Product",
+        "categories": {
+            "Testing":[
+                "ubuntu:bionic"
+            ],
+            "Testing2":[
+                "debian:stretch"
+            ]
+
+        }},
+  "cve_comment":{},
+
+    "ignore_cve":{"images": {"docker-prod-local.artifactory.mirantis.com/nc/postgresql:9.6.20-bionic-1612956425468":
+  {"packages": [["openldap (2.4.45+dfsg-1ubuntu1.9)", "Exclude..."]],
+    "packages_cves": {"systemd (237-3ubuntu10.44)":  [["CVE-2020-13776", "Some comment"]]},
+    "cves": []}, "docker-prod-local.artifactory.mirantis.com/nc/alerta:8.0.2-bionic-1607612953087":
+    {"packages": [["bash (4.4.18-2ubuntu1.2)", "Excluded..."]]}},
+
+    "cves": [],
+
+    "packages": [],
+
+    "packages_cves": {},
+
+      "namespace_cves":
+
+              {}
+
+  }
+
+    ,
+
+"cve_severity":{"images": {},
+
+    "cves": [["CVE-2021-3345", "High (Mirantis)"]],
+
+    "packages_cves": {},
+
+      "namespace_cves":
+
+              {},
+  "processor_cves": {}
+
+
+}
+
+}
