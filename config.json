@@ -2,14 +2,30 @@
   "default_category": "Product",
         "categories": {
             "Testing":[
-                "ubuntu:bionic"
+                "docker-dev-kaas-local.docker.mirantis.net/core/frontend:1.17.7-61-43d9b77",
+                "docker-dev-kaas-local.docker.mirantis.net/bm/external/httpd:2.4.46-20201001171500",
+              "docker-dev-kaas-local.docker.mirantis.net/ceph/cephcsi/rbdplugin:v1.0.0"
             ],
-            "Testing2":[
-                "debian:stretch"
-            ]
+          "Testing2":
+          ["mirantiseng.docker.mirantis.net/mirantiseng/dtr-postgres:2.9.0-rc4"]
 
         }},
-  "cve_comment":{},
+  "cve_comment": {"images": {"mirantiseng.docker.mirantis.net/mirantiseng/dtr:2.9.0-rc4":
+  {"packages": [["openldap (2.4.45+dfsg-1ubuntu1.9)", "Exclude..."]],
+    "packages_cves": {"postgresql (10.12-r0)":  [["CVE-2020-25696", "Set severity to Medium"]]},
+    "cves": []}},
+
+    "cves": [],
+
+    "packages": [],
+
+    "packages_cves": {},
+
+      "namespace_cves":
+
+              {}
+
+  },
 
     "ignore_cve":{"images": {"docker-prod-local.artifactory.mirantis.com/nc/postgresql:9.6.20-bionic-1612956425468":
   {"packages": [["openldap (2.4.45+dfsg-1ubuntu1.9)", "Exclude..."]],
@@ -33,7 +49,7 @@
 
 "cve_severity":{"images": {},
 
-    "cves": [["CVE-2021-3345", "High (Mirantis)"]],
+    "cves": [["CVE-2020-25696", "Medium (Mirantis)"]],
 
     "packages_cves": {},
 
