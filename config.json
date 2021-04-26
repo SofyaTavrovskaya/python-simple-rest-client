@@ -2,9 +2,8 @@
   "default_category": "Product",
         "categories": {
             "Testing":[
-                "docker-dev-kaas-local.docker.mirantis.net/bm/external/local-volume-provisioner:v2.3.4",
-                "docker-dev-kaas-local.docker.mirantis.net/ceph/cephcsi/cephfsplugin:v1.0.0",
-              "docker-dev-kaas-local.docker.mirantis.net/core/test/frontend:1.18.1-28-b7040eb"
+                "docker-dev-kaas-local.docker.mirantis.net/openstack/extra/vbmc",
+                "docker-dev-kaas-local.docker.mirantis.net/tungsten/cp-kafka"
             ]
         }},
   "cve_comment": {"images": {"docker-dev-kaas-local.docker.mirantis.net/general/external/docker.io/alexz0kh/vbmc_u20:latest-20201104":
@@ -17,7 +16,7 @@
 
     "cves": [["CVE-2020-1971", "Some comment to cves"]],
 
-    "packages": [["openssl-libs (1:1.1.1c-2.el8)", "Some comment to package"]],
+    "packages": [],
 
     "packages_cves": {"libnghttp2 (1.33.0-1.el8_0.1)":  [["RHSA-2020:2755", "Some comment to package_cve"]]},
 
@@ -34,7 +33,7 @@
 
     "cves": [["CVE-2020-14343", "Exclude due to..."]],
 
-    "packages": [],
+    "packages": [["openssl", "Due to testing"]],
 
     "packages_cves": {"PyYAML (3.12)":  [["CVE-2020-1747", "Exclude due to..."]]},
 
@@ -45,6 +44,7 @@
   }
 
     ,
+ "ignore_images": {"docker-dev-kaas-local.docker.mirantis.net/openstack/stepler", "Due to testing purpose"},
 
 "cve_severity":{"images": {"mirantiseng.docker.mirantis.net/mirantiseng/dtr-postgres:2.9.0-rc4":
     {"packages_cves": {"postgresql (10.12-r0)":  [["CVE-2020-25696", "Critical (Mirantis)"]]}}},
