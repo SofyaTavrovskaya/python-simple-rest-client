@@ -44,7 +44,7 @@
   }
 
     ,
- "ignore_images": {"docker-dev-kaas-local.docker.mirantis.net/openstack/stepler", "Due to testing purpose"},
+ "ignore_images": {"docker-dev-kaas-local.docker.mirantis.net/openstack/stepler": "Due to testing purpose"},
 
 "cve_severity":{"images": {"mirantiseng.docker.mirantis.net/mirantiseng/dtr-postgres:2.9.0-rc4":
     {"packages_cves": {"postgresql (10.12-r0)":  [["CVE-2020-25696", "Critical (Mirantis)"]]}}},
