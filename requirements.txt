@@ -42,5 +42,5 @@ toml==0.10.0
 traceback2==1.4.0
 unittest2==1.1.0
 virtualenv==16.7.9
-wcwidth==0.1.8
+wcwidth==0.6.0
 zipp==0.6.0
