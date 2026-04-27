@@ -5,7 +5,7 @@ asynctest==0.13.0
 attrs==19.3.0
 certifi==2019.11.28
 cfgv==2.0.1
-chardet==3.0.4
+chardet==7.4.3
 extras==1.0.0
 fixtures==3.0.0
 h11==0.8.1
