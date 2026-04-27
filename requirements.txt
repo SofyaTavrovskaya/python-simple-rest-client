@@ -10,7 +10,7 @@ extras==1.0.0
 fixtures==3.0.0
 h11==0.8.1
 h2==3.1.1
-hpack==3.0.0
+hpack==4.1.0
 hstspreload==2019.12.19
 httpx==0.7.8
 hyperframe==5.2.0
